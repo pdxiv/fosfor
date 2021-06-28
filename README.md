@@ -26,10 +26,10 @@ nc -b -u 192.168.10.255 2323
 
 ## Command data types
 
-| Data type        | Bytes | Encodes to                                    |
-|------------------|-------|-----------------------------------------------|
-| Unsigned integer | 10    | 32 bit unsigned integer from 0 to 4294967295  |
-| Character        | 1     | 8859-1/Latin-1 characters                     |
+| Data type      | Bytes | Encodes to                                         |
+|----------------|-------|----------------------------------------------------|
+| Signed integer | 10    | 32 bit signed integer from -999999999 to 999999999 |
+| Character      | 1     | 8859-1/Latin-1 characters                          |
 
 ## Commands
 
