@@ -3,7 +3,7 @@
 ## High priority
 
 * Implement "modify order" command
-* Implement "shutdown" command, to do a clean shutdown
+* Implement "shutdown" command, to do a clean shutdown. Should include a "time" argument to schedule a shutdown to a specific time (if time is zero, shut down immediately).
 * readCommandsFromFile() failing to read a basic data file should shut down the program
 * Get rid of the "side" character in "Add order" and "Modify order" commands. It makes the data look unsymmetrical and this makes troubleshooting harder. Instead, signify "Bid" and "Ask" sides with the sign of the order volume, so that "-100" would be a "Bid on 100 units" and "100" would be "Ask on 100 units".
 * Add output messages (via STDOUT or UDP) for:
