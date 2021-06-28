@@ -167,7 +167,6 @@ int addOrderToTick(orderBook *oBook, int side, int price, int volume, int timeTo
 // Argument 2: Value of new upper price.
 // Returns: 0 - Error.
 // Returns: 1 - Execution successful.
-// This function could be modified without too much trouble to grow data both up and down.
 int growPriceTicks(orderBook *oBook, int newTopPrice)
 {
     printf("-D-: Running growPriceTicks()\n");
