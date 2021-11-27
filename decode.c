@@ -5,7 +5,8 @@
 struct decoded_msgpack
 {
     int32_t int_32[8];
-    char *fixstr;
+    char *str;
+    uint8_t strLength;
 };
 
 /*
@@ -206,7 +207,8 @@ bool decodething(uint8_t input_bytes, char *input_byte, struct decoded_msgpack *
         {
             uint8_t string_characters = (input_byte[byte_location] & 0b00011111);
             byte_location++;
-            msgpack_data->fixstr = input_byte + byte_location;
+            msgpack_data->str = input_byte + byte_location;
+            msgpack_data->strLength = string_characters;
             byte_location += string_characters;
         }
         // str 8 (0xd9)
@@ -215,7 +217,8 @@ bool decodething(uint8_t input_bytes, char *input_byte, struct decoded_msgpack *
             byte_location++;
             uint8_t string_characters = input_byte[byte_location];
             byte_location += 1;
-            msgpack_data->fixstr = input_byte + byte_location;
+            msgpack_data->str = input_byte + byte_location;
+            msgpack_data->strLength = string_characters;
             byte_location += string_characters;
         }
         // str 16 (0xda)
@@ -224,7 +227,8 @@ bool decodething(uint8_t input_bytes, char *input_byte, struct decoded_msgpack *
             byte_location++;
             uint16_t string_characters = input_byte[byte_location + 1];
             byte_location += 2;
-            msgpack_data->fixstr = input_byte + byte_location;
+            msgpack_data->str = input_byte + byte_location;
+            msgpack_data->strLength = (uint8_t)string_characters;
             byte_location += (uint8_t)string_characters;
         }
         // str 32 (0xdb)
@@ -233,7 +237,8 @@ bool decodething(uint8_t input_bytes, char *input_byte, struct decoded_msgpack *
             byte_location++;
             uint32_t string_characters = input_byte[byte_location + 3];
             byte_location += 4;
-            msgpack_data->fixstr = input_byte + byte_location;
+            msgpack_data->str = input_byte + byte_location;
+            msgpack_data->strLength = (uint8_t)string_characters;
             byte_location += (uint8_t)string_characters;
         }
         else
@@ -266,7 +271,7 @@ int main()
             printf("priceTicks: %d\n", msgpack_data.int_32[2]);
             printf("orderBufferAllocationSize: %d\n", msgpack_data.int_32[3]);
             printf("orderBookId: %d\n", msgpack_data.int_32[4]);
-            printf("name: %.16s\n", msgpack_data.fixstr);
+            printf("name: %.16s\n", msgpack_data.str);
             break;
         case 'a':
             printf("command: %c\n", msgpack_data.int_32[0]);
