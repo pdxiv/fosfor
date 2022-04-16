@@ -66,17 +66,16 @@ Example of order book creation in roughly equivalent YAML format:
 
 This will add an order to an order book.
 
-If `timeToLive` has a value of 0, the order will be a "market order" of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order). If the combination of `userId`, `userReference`, `OrderBookId`, `side` and `price` are not unique, the behavior should be treated as "undefined".
+If `timeToLive` has a value of 0, the order will be a "market order" of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order). If the combination of `userId`, `userReference`, `OrderBookId` and `price` are not unique, the behavior should be treated as "undefined". Bid and Ask are represented by the sign of the price tick, so that "-100" would be a "Bid on 100 units" and "100" would be "Ask on 100 units".
 
-| Field name    | Data type             | Description                                        |
-|---------------|-----------------------|----------------------------------------------------|
-| userId        | int 32                | The unique ID of the user placing the order        |
-| userReference | int 32                | The user's unique internal reference for the order |
-| orderBookId   | int 32                | ID code of the order book                          |
-| side          | positive fixint (B/A) | Bid or Ask                                         |
-| price         | int 32                | Which price tick to place the order in             |
-| volume        | int 32                | Number of units user wants to buy or sell          |
-| timeToLive    | int 32                | How long before the order is deleted               |
+| Field name    | Data type             | Description                                                |
+|---------------|-----------------------|------------------------------------------------------------|
+| userId        | int 32                | The unique ID of the user placing the order                |
+| userReference | int 32                | The user's unique internal reference for the order         |
+| orderBookId   | int 32                | ID code of the order book                                  |
+| price         | int 32                | Which price tick the order is placed in, and if Bid or Ask |
+| volume        | int 32                | Number of units user wants to buy or sell                  |
+| timeToLive    | int 32                | How long before the order is deleted                       |
 
 Example of adding a "bid" order in roughly equivalent YAML format:
 
@@ -86,8 +85,7 @@ Example of adding a "bid" order in roughly equivalent YAML format:
 - 123 # userId (int32)
 - 789 # userReference (int32)
 - 234 # orderBookId (int32)
-- "B" # side (positive fixint (B/A))
-- 10 # price (int32)
+- -10 # price (int32)
 - 2 # volume (int32)
 - 130 # timeToLive (int32)
 ```
@@ -110,17 +108,16 @@ Example of deleting an order book in roughly equivalent YAML format:
 
 ### m: Modify order (not yet implemented!)
 
-The combination of `userId`, `userReference`, `orderBookId`, `side` and `price` fields are used when a user wants to modify or delete an order that has been placed. It's up to the user to keep track of these fields. The user will need to specify a value for volume and timeToLive, but a negative value will keep the old value. A value of 0 in either `volume` or `timeToLive` will delete the order from the order book. The price of an order can not be modified. A deleted order can not be modified further.
+The combination of `userId`, `userReference`, `orderBookId` and `price` fields are used when a user wants to modify or delete an order that has been placed. It's up to the user to keep track of these fields. The user will need to specify a value for volume and timeToLive, but a negative value will keep the old value. A value of 0 in either `volume` or `timeToLive` will delete the order from the order book. The price of an order can not be modified. A deleted order can not be modified further.
 
-| Field name    | Data type             | Description                                        |
-|---------------|-----------------------|----------------------------------------------------|
-| userId        | int 32                | The unique ID of the user placing the order        |
-| userReference | int 32                | The user's unique internal reference for the order |
-| orderBookId   | int 32                | ID code of the order book                          |
-| side          | positive fixint (B/A) | Bid or Ask                                         |
-| price         | int 32                | Which price tick the order is placed in            |
-| volume        | int 32                | Number of units user wants to buy or sell          |
-| timeToLive    | int 32                | How long before the order is deleted               |
+| Field name    | Data type             | Description                                                |
+|---------------|-----------------------|------------------------------------------------------------|
+| userId        | int 32                | The unique ID of the user placing the order                |
+| userReference | int 32                | The user's unique internal reference for the order         |
+| orderBookId   | int 32                | ID code of the order book                                  |
+| price         | int 32                | Which price tick the order is placed in, and if Bid or Ask |
+| volume        | int 32                | Number of units user wants to buy or sell                  |
+| timeToLive    | int 32                | How long before the order is deleted                       |
 
 Example of deleting an order in roughly equivalent YAML format:
 
@@ -130,8 +127,7 @@ Example of deleting an order in roughly equivalent YAML format:
 - 123 # userId (int32)
 - 789 # userReference (int32)
 - 234 # orderBookId (int32)
-- "B" # side (positive fixint (B/A))
-- 10 # price (int32)
+- -10 # price (int32)
 - 0 # volume (int32)
 - -1 # timeToLive (int32)
 ```
