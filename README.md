@@ -66,7 +66,7 @@ Example of order book creation in roughly equivalent YAML format:
 
 This will add an order to an order book.
 
-If timeToLive has a value of 0, the order will be a market order of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order). If the combination of userId, userReference, OrderBookId, side and price are not unique, the behavior should be treated as "undefined".
+If `timeToLive` has a value of 0, the order will be a "market order" of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order). If the combination of `userId`, `userReference`, `OrderBookId`, `side` and `price` are not unique, the behavior should be treated as "undefined".
 
 | Field name    | Data type             | Description                                        |
 |---------------|-----------------------|----------------------------------------------------|
@@ -78,7 +78,7 @@ If timeToLive has a value of 0, the order will be a market order of type IOC (im
 | volume        | int 32                | Number of units user wants to buy or sell          |
 | timeToLive    | int 32                | How long before the order is deleted               |
 
-Example of adding a bid order in roughly equivalent YAML format:
+Example of adding a "bid" order in roughly equivalent YAML format:
 
 ```yaml
 ---
@@ -110,7 +110,7 @@ Example of deleting an order book in roughly equivalent YAML format:
 
 ### m: Modify order (not yet implemented!)
 
-The combination of userId, userReference, orderBookId, side and price fields are used when a user wants to modify or delete an order that has been placed. It's up to the user to keep track of these fields. The user will need to specify a value for volume and timeToLive, but a negative value will keep the old value. A value of 0 in either volume or timeToLive will delete the order from the order book. The price of an order can not be modified. A deleted order can not be modified further.
+The combination of `userId`, `userReference`, `orderBookId`, `side` and `price` fields are used when a user wants to modify or delete an order that has been placed. It's up to the user to keep track of these fields. The user will need to specify a value for volume and timeToLive, but a negative value will keep the old value. A value of 0 in either `volume` or `timeToLive` will delete the order from the order book. The price of an order can not be modified. A deleted order can not be modified further.
 
 | Field name    | Data type             | Description                                        |
 |---------------|-----------------------|----------------------------------------------------|
