@@ -66,7 +66,7 @@ Example of order book creation in roughly equivalent YAML format:
 
 This will add an order to an order book.
 
-If timeToLive has a value of 0, the order will be a market order of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order).
+If timeToLive has a value of 0, the order will be a market order of type IOC (immediate or cancel, attempt to match all or part immediately and then immediately cancel any unfilled portion of the order). If the combination of userId, userReference, OrderBookId, side and price are not unique, the behavior should be treated as "undefined".
 
 | Field name    | Data type             | Description                                        |
 |---------------|-----------------------|----------------------------------------------------|
